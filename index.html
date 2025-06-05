@@ -1,95 +1,982 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sajid Kalam | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8f9fa;
-      color: #212529;
-      padding: 2rem;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.1rem;
-      color: #6c757d;
-    }
-    section {
-      max-width: 800px;
-      margin: 0 auto 2rem auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    section h2 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      color: #343a40;
-    }
-    ul {
-      list-style: none;
-    }
-    li {
-      margin-bottom: 0.75rem;
-    }
-    a {
-      color: #0d6efd;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #6c757d;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajid Kalam | Associate Engineer & Web Developer</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-bg: #0a0e27;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0e27, #1a1f3a, #2d1b69);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .bg-animated::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(30px) rotate(240deg); }
+        }
+
+        /* Navigation */
+        .navbar-custom {
+            background: rgba(10, 14, 39, 0.9) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3rem;
+        }
+
+        /* Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Buttons */
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-outline-gradient {
+            border: 2px solid transparent;
+            background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
+                        var(--primary-gradient) border-box;
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 10px 28px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline-gradient:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Skills */
+        .skill-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* Progress Bars */
+        .progress-custom {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-custom {
+            background: var(--primary-gradient);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 2s ease-in-out;
+        }
+
+        /* Projects */
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            background: var(--primary-gradient);
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .project-body {
+            padding: 2rem;
+        }
+
+        /* Badges */
+        .badge-custom {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            margin: 0.25rem;
+            display: inline-block;
+        }
+
+        /* Contact */
+        .contact-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: block;
+            height: 100%;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section {
+                text-align: center;
+                padding-top: 100px;
+            }
+            
+            .glass-card {
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 14, 39, 0.9);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            margin-top: 5rem;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Sajid Kalam</h1>
-    <p>Full Stack Developer | Python & Django | AI Enthusiast</p>
-  </header>
+    <!-- Animated Background -->
+    <div class="bg-animated"></div>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I am a passionate full-stack developer skilled in Django, Python, HTML/CSS, and AI/ML integrations. I love building efficient, scalable web apps and working on real-world solutions.</p>
-  </section>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#home">SK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#expertise">Expertise</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>AI Complaint Management System</strong> – Smart India Hackathon finalist project using AI for complaint resolution in Indian Railways.</li>
-      <li><strong>Telehealth Platform</strong> – Django-based live appointment system with video consultation and digital prescription features.</li>
-      <li><strong>Geo-Spatial Crime Analysis</strong> – Machine learning models applied to crime data for pattern detection and prediction.</li>
-    </ul>
-  </section>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div data-aos="fade-up" data-aos-duration="1000">
+                        <h1 class="hero-title">Sajid Kalam</h1>
+                        <p class="hero-subtitle">Associate Engineer | Web Developer | MCA (Pursuing) | Data Science Enthusiast</p>
+                        <p class="hero-tagline">💡 Code. Clarity. Curiosity.</p>
+                        <p class="lead mb-4" style="color: var(--text-secondary); font-size: 1.1rem;">
+                            Emerging technologist at <strong style="color: var(--text-primary);">Corunit Media Corp</strong>, passionate about building clean, responsive, and scalable web applications with a focus on technical precision and innovation.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="#projects" class="btn-gradient">View Projects</a>
+                            <a href="#contact" class="btn-outline-gradient">Get In Touch</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="glass-card">
+                        <div class="mb-3">
+                            <i class="bi bi-code-slash" style="font-size: 4rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                        </div>
+                        <h4>Full-Stack Developer</h4>
+                        <p class="mb-0" style="color: var(--text-secondary);">Building the future, one line of code at a time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="bi bi-chevron-down" style="font-size: 2rem; color: var(--text-secondary);"></i>
+        </div>
+    </section>
 
-  <section>
-    <h2>Contact</h2>
-    <ul>
-      <li>Email: sajid5102552@gmail.com</li>
-      <li>GitHub: <a href="https://github.com/SajidKalam-byte" target="_blank">github.com/SajidKalam-byte</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/sajid-kalam/" target="_blank">linkedin.com/in/sajid-kalam</a></li>
-    </ul>
-  </section>
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">About Me</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="glass-card" data-aos="fade-up" data-aos-duration="1000">
+                        <p class="lead text-center mb-4" style="color: var(--text-secondary); font-size: 1.2rem;">
+                            Sajid Kalam is an emerging technologist and Associate Engineer at Corunit Media Corp, passionate about building clean, responsive, and scalable web applications. With a strong foundation in backend development and growing expertise in data science, he brings a dual focus on technical precision and innovation to every project.
+                        </p>
+                        <p style="color: var(--text-secondary);">
+                            Currently pursuing his Master of Computer Applications, Sajid blends academic excellence with hands-on project work in Django, HTML, CSS, JavaScript, and Python. His experience spans full-stack web development and applied machine learning—having developed high-accuracy classification models for spam and hate speech detection during his internship at Personifwy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    &copy; 2025 Sajid Kalam. All rights reserved.
-  </footer>
+    <!-- Core Expertise Section -->
+    <section id="expertise" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">🔧 Core Expertise</h2>
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="glass-card h-100">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-globe skill-icon"></i>
+                            <h4>Full-Stack Web Development</h4>
+                        </div>
+                        <p style="color: var(--text-secondary);">
+                            Skilled in Django, JavaScript, HTML, and CSS for building efficient, responsive digital platforms.
+                        </p>
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Django</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>JavaScript</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>HTML/CSS</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="glass-card h-100">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-robot skill-icon"></i>
+                            <h4>Data Science & Machine Learning</h4>
+                        </div>
+                        <p style="color: var(--text-secondary);">
+                            Built supervised learning models using Python (SVM, Logistic Regression), Tfidf, and SMOTE with 90%+ accuracy.
+                        </p>
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Python</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Machine Learning</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Data Analysis</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="glass-card h-100">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-code-square skill-icon"></i>
+                            <h4>Clean Code & Optimization</h4>
+                        </div>
+                        <p style="color: var(--text-secondary);">
+                            Emphasizes modular, maintainable code and optimization for both UI and backend logic.
+                        </p>
+                        <div class="row text-center mt-4">
+                            <div class="col-6">
+                                <h5 style="color: var(--text-primary);">98%</h5>
+                                <small style="color: var(--text-secondary);">Code Quality</small>
+                            </div>
+                            <div class="col-6">
+                                <h5 style="color: var(--text-primary);">95%</h5>
+                                <small style="color: var(--text-secondary);">Performance</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                    <div class="glass-card h-100">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-lightbulb skill-icon"></i>
+                            <h4>Problem Solving & Adaptability</h4>
+                        </div>
+                        <p style="color: var(--text-secondary);">
+                            Strong analytical mindset, fast learner, and collaborative contributor to agile product teams.
+                        </p>
+                        <div class="row text-center mt-4">
+                            <div class="col-6">
+                                <h5 style="color: var(--text-primary);">Fast</h5>
+                                <small style="color: var(--text-secondary);">Learning</small>
+                            </div>
+                            <div class="col-6">
+                                <h5 style="color: var(--text-primary);">Agile</h5>
+                                <small style="color: var(--text-secondary);">Mindset</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects & Achievements Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">🚀 Projects & Achievements</h2>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h4><i class="bi bi-shield-check me-2"></i>SMS Spam Classifier</h4>
+                        </div>
+                        <div class="project-body">
+                            <p style="color: var(--text-secondary);">
+                                Achieved 98% accuracy with an SVM-based SMS spam classifier through rigorous preprocessing and tuning.
+                            </p>
+                            <div class="mb-3">
+                                <span class="badge-custom">Python</span>
+                                <span class="badge-custom">SVM</span>
+                                <span class="badge-custom">NLP</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="h2 mb-0" style="color: #4facfe;">98%</div>
+                                <small style="color: var(--text-secondary);">Accuracy Achieved</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h4><i class="bi bi-chat-square-text me-2"></i>Hate Speech Detection</h4>
+                        </div>
+                        <div class="project-body">
+                            <p style="color: var(--text-secondary);">
+                                Improved hate speech detection accuracy to 92% using class balancing and NLP techniques.
+                            </p>
+                            <div class="mb-3">
+                                <span class="badge-custom">Machine Learning</span>
+                                <span class="badge-custom">SMOTE</span>
+                                <span class="badge-custom">TF-IDF</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="h2 mb-0" style="color: #4facfe;">92%</div>
+                                <small style="color: var(--text-secondary);">Detection Accuracy</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h4><i class="bi bi-people me-2"></i>Django Web Systems</h4>
+                        </div>
+                        <div class="project-body">
+                            <p style="color: var(--text-secondary);">
+                                Contributed to multi-user login and dynamic PDF generation features in Django-based systems.
+                            </p>
+                            <div class="mb-3">
+                                <span class="badge-custom">Django</span>
+                                <span class="badge-custom">PDF Generation</span>
+                                <span class="badge-custom">Authentication</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="h2 mb-0" style="color: #4facfe;">Multi-User</div>
+                                <small style="color: var(--text-secondary);">System Architecture</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-lg-12">
+                    <div class="glass-card text-center" data-aos="fade-up" data-aos-duration="1000">
+                        <h4 class="mb-3">Recognition & Impact</h4>
+                        <p style="color: var(--text-secondary); font-size: 1.1rem;">
+                            Recognized for clear documentation, team collaboration, and fast integration of new technologies.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <i class="bi bi-award" style="font-size: 2rem; color: #f5576c;"></i>
+                                <h5 class="mt-2">Excellence</h5>
+                                <p style="color: var(--text-secondary);">Clear Documentation</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-people" style="font-size: 2rem; color: #4facfe;"></i>
+                                <h5 class="mt-2">Collaboration</h5>
+                                <p style="color: var(--text-secondary);">Team Player</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-lightning" style="font-size: 2rem; color: #f093fb;"></i>
+                                <h5 class="mt-2">Innovation</h5>
+                                <p style="color: var(--text-secondary);">Fast Integration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">🎓 Education & Certifications</h2>
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="glass-card h-100">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-mortarboard" style="font-size: 3rem; color: #4facfe;"></i>
+                            <h4 class="mt-3">Current Education</h4>
+                        </div>
+                        <div class="mb-4">
+                            <h5>MCA (Pursuing)</h5>
+                            <p style="color: var(--text-secondary);">Siliguri Institute of Technology</p>
+                            <span class="badge-custom">In Progress</span>
+                        </div>
+                        <div class="mb-4">
+                            <h5>BCA</h5>
+                            <p style="color: var(--text-secondary);">University of North Bengal</p>
+                            <div class="d-flex justify-content-between">
+                                <span>CGPA: <strong style="color: #4facfe;">9.31</strong></span>
+                                <span class="badge-custom">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="glass-card h-100">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-patch-check" style="font-size: 3rem; color: #f5576c;"></i>
+                            <h4 class="mt-3">Certifications & Skills</h4>
+                        </div>
+                        <div class="mb-3">
+                            <h6><i class="bi bi-check-circle me-2" style="color: #4facfe;"></i>Python & Machine Learning</h6>
+                            <small style="color: var(--text-secondary);">Certified by Simplilearn</small>
+                        </div>
+                        <div class="mb-3">
+                            <h6><i class="bi bi-check-circle me-2" style="color: #4facfe;"></i>Programming Languages</h6>
+                            <small style="color: var(--text-secondary);">C, C++, Java, Python</small>
+                        </div>
+                        <div class="mb-3">
+                            <h6><i class="bi bi-check-circle me-2" style="color: #4facfe;"></i>Database & Web Technologies</h6>
+                            <small style="color: var(--text-secondary);">SQL, DBMS, Web Development</small>
+                        </div>
+                        <div class="mb-3">
+                            <h6><i class="bi bi-check-circle me-2" style="color: #4facfe;"></i>Strong Fundamentals</h6>
+                            <small style="color: var(--text-secondary);">Data Structures, Algorithms, System Design</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Traits Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">🌱 Professional Traits & Vision</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="glass-card text-center h-100">
+                        <i class="bi bi-graph-up-arrow" style="font-size: 3rem; color: #4facfe;"></i>
+                        <h5 class="mt-3">Growth-Oriented</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Always exploring the latest in web frameworks and AI/ML tools to broaden impact.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="glass-card text-center h-100">
+                        <i class="bi bi-zoom-in" style="font-size: 3rem; color: #f5576c;"></i>
+                        <h5 class="mt-3">Detail-Focused</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Values code readability, testing, and scalable architecture from the ground up.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="glass-card text-center h-100">
+                        <i class="bi bi-people-fill" style="font-size: 3rem; color: #f093fb;"></i>
+                        <h5 class="mt-3">Team Player</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Communicates clearly, adapts quickly, and aligns technical efforts with business goals.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                    <div class="glass-card text-center h-100">
+                        <i class="bi bi-bullseye" style="font-size: 3rem; color: #00f2fe;"></i>
+                        <h5 class="mt-3">Driven by Impact</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Aims to create digital systems that are not just functional, but meaningful.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corunit Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="glass-card text-center" data-aos="fade-up" data-aos-duration="1000">
+                        <h3 class="mb-4">🤝 At Corunit Media Corp</h3>
+                        <p class="lead" style="color: var(--text-secondary); font-size: 1.2rem;">
+                            Sajid is part of the next generation of engineering talent helping Corunit Media Corp deliver high-performance digital marketing platforms. His evolving expertise, proactive mindset, and dedication to quality make him a valuable contributor to the company's mission of clarity, performance, and integrity in digital solutions.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <h5 style="color: #4facfe;">Clarity</h5>
+                                <p style="color: var(--text-secondary);">Clear communication and documentation</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 style="color: #f5576c;">Performance</h5>
+                                <p style="color: var(--text-secondary);">High-performance digital solutions</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 style="color: #f093fb;">Integrity</h5>
+                                <p style="color: var(--text-secondary);">Ethical and quality-driven approach</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Let's Connect</h2>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000">
+                    <a href="mailto:sajid5102552@gmail.com" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <h5>Email</h5>
+                        <p style="color: var(--text-secondary);">sajid5102552@gmail.com</p>
+                    </a>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <a href="https://github.com/SajidKalam-byte" target="_blank" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="bi bi-github"></i>
+                        </div>
+                        <h5>GitHub</h5>
+                        <p style="color: var(--text-secondary);">SajidKalam-byte</p>
+                    </a>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <a href="https://www.linkedin.com/in/sajid-kalam/" target="_blank" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="bi bi-linkedin"></i>
+                        </div>
+                        <h5>LinkedIn</h5>
+                        <p style="color: var(--text-secondary);">sajid-kalam</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p style="color: var(--text-secondary); margin: 0;">
+                    © 2025 Sajid Kalam. Crafted with passion and innovation.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Animate progress bars when they come into view
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-bar-custom');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('#expertise .glass-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add parallax effect to background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.bg-animated');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', function() {
+            const heroTitle = document.querySelector('.hero-title');
+            const originalText = heroTitle.textContent;
+            typeWriter(heroTitle, originalText, 80);
+        });
+    </script>
 </body>
 </html>
